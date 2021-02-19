@@ -1,0 +1,4 @@
+﻿  Source.cpp
+C:\Users\Malachi Barton\source\repos\PPG5\PPG5\Source.cpp(123,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Malachi Barton\source\repos\PPG5\PPG5\Source.cpp(207,35): warning C4018: '<=': signed/unsigned mismatch
+C:\Users\Malachi Barton\source\repos\PPG5\PPG5\Source.cpp(238): error C4716: 'calculateAC': must return a value
