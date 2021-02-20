@@ -89,6 +89,7 @@ void displayBattle(const Object& player, const std::vector<Object>& monsters)
 {
 	printName(player);
 	std::cout << " h:" << player.health << std::endl;
+	std::for_each(begin(player.inventory), end(player.inventory), [&](std::pair<Item::Type, Item>) {std::cout << " "; printItem(); std::cout << std::endl; });
 	for (const auto& item : player.inventory)
 	{
 		std::cout << "  ";
@@ -289,17 +290,10 @@ void heal(Object& object)
 }
 void bringOutYourDead(std::vector<Object>& monsters)
 {
-
 	auto is_dead = [](auto monsterIter) {return monsterIter->health <= 0};
 
-	monsters.erase(std::remove_if(monsters.begin(), monsters.end(), [&](auto monsterIter) {is_dead), monsters.end());
-	{
-		printName(*monsterIter);
-		std::cout << " has died!!!" << std::endl << std::endl;
-		monsterIter = monsters.erase(monsterIter);
-	}
-	else
-	{
-		monsterIter++;
-	}
+	printName(*monsters.erase(std::remove_if(monsters.begin(), monsters.end(), [](auto monsterIter) {is_dead}), monsters.end()));
+	std::cout << " has died!!!" << std::endl << std::endl;
+
+	
 }
