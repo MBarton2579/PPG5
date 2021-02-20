@@ -289,17 +289,17 @@ void heal(Object& object)
 }
 void bringOutYourDead(std::vector<Object>& monsters)
 {
-	for (auto monsterIter{ monsters.begin() }; monsterIter != monsters.end(); )
+
+	auto is_dead = [](auto monsterIter) {return monsterIter->health <= 0};
+
+	monsters.erase(std::remove_if(monsters.begin(), monsters.end(), [&](auto monsterIter) {is_dead), monsters.end());
 	{
-		if (monsterIter->health <= 0)
-		{
-			printName(*monsterIter);
-			std::cout << " has died!!!" << std::endl << std::endl;
-			monsterIter = monsters.erase(monsterIter);
-		}
-		else
-		{
-			monsterIter++;
-		}
+		printName(*monsterIter);
+		std::cout << " has died!!!" << std::endl << std::endl;
+		monsterIter = monsters.erase(monsterIter);
+	}
+	else
+	{
+		monsterIter++;
 	}
 }
