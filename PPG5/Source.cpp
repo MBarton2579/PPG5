@@ -105,9 +105,12 @@ void displayBattle(const Object& player, const std::vector<Object>& monsters)
 }
 std::vector<Object> createMonsters(const Object& player)
 {
-	std::vector<Object> monsters;
+	
 	std::normal_distribution<double> randomNumMonsters((double)player.level, player.level / 2.0);
 	int numMonsters{ std::max(1, (int)randomNumMonsters(engine)) };
+	std::vector<Object> monsters(numMonsters);
+	std::generate(monsters.begin(), monsters.end(), [&]() mutable {std::normal_distribution<double> monsterLevel((float)player.level, player.level / 4.0); });
+
 	for (int i{ 0 }; i < numMonsters; i++)
 	{
 		//set level based on player level
@@ -192,6 +195,7 @@ void levelUp(Object& player)
 	std::cout << "You found a ";
 	printItem(found);
 	std::cout << "!!!!" << std::endl;
+	
 	if (
 		auto haveOne{ player.inventory.find(found.clasification) };
 		haveOne == player.inventory.end()
